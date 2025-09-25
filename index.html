@@ -83,84 +83,84 @@
       <!-- ЛОГО -->
       <img src="Logo.PNG" alt="MethaneX Logo" class="logo" />
 
-      <h1>Онлайн-расчёт эффекта</h1>
-      <p class="sub">Введите годовые выбросы метана в <b>м³/год</b> — увидите продукты, климатический эффект и экономику.</p>
+      <h1>Online effect calculation</h1>
+      <p class="sub">Enter annual methane emissions in <b>m³/year</b> — see products, climate impact, and economics.</p>
 
       <div class="row">
-        <label class="input" title="Годовой объём метана (норм. м³/год)">
-          <input id="flow" type="number" min="0" step="100" placeholder="м³/год" inputmode="numeric" />
-          <span class="unit">м³/год</span>
+        <label class="input" title="Annual methane volume (standard m³/year)">
+          <input id="flow" type="number" min="0" step="100" placeholder="m³/year" inputmode="numeric" />
+          <span class="unit">m³/year</span>
         </label>
       </div>
 
       <div class="kpis" id="results">
         <div class="kpi">
-          <div class="label">Водород</div>
+          <div class="label">Hydrogen</div>
           <div class="value" id="h2Mass">—</div>
           <div class="small" id="h2Vol"> </div>
         </div>
         <div class="kpi">
-          <div class="label">Твёрдый углерод</div>
+          <div class="label">Solid carbon</div>
           <div class="value" id="cMass">—</div>
-          <div class="small">т/год</div>
+          <div class="small">t/year</div>
         </div>
         <div class="kpi">
-          <div class="label">Сокращение ПГ (CO₂-экв.)</div>
+          <div class="label">Reduction GG (CO₂-eq.)</div>
           <div class="value" id="co2e">—</div>
-          <div class="small">т CO₂-экв./год</div>
+          <div class="small">т CO₂-eq./year</div>
         </div>
         <div class="kpi good">
-          <div class="label">Годовой финансовый результат*</div>
+          <div class="label">Annual financial result*</div>
           <div class="value" id="profit">—</div>
-          <div class="small">до вычета CAPEX</div>
+          <div class="small">before CAPEX</div>
         </div>
       </div>
 
       <details>
-        <summary>Расширенные настройки (по умолчанию базовый сценарий)</summary>
+        <summary>Advanced settings (default basic scenario)</summary>
         <div class="grid">
           <label class="input">
             <input id="conv" type="number" min="0" max="100" step="1" value="70" />
-            <span class="unit">Конверсия CH₄, %</span>
+            <span class="unit">Conversion CH₄, %</span>
           </label>
           <label class="input">
             <input id="sei" type="number" min="0" step="0.1" value="3.5" />
-            <span class="unit">Удельная энергия, кВт·ч/м³ CH₄</span>
+            <span class="unit">Specific energy, kW·h/m³ CH₄</span>
           </label>
           <label class="input">
             <input id="tariff" type="number" min="0" step="0.01" value="0.12" />
-            <span class="unit">Тариф, $/кВт·ч</span>
+            <span class="unit">Tariff, $/kW·h</span>
           </label>
           <label class="input">
             <input id="h2price" type="number" min="0" step="0.1" value="1.5" />
-            <span class="unit">Цена H₂, $/кг</span>
+            <span class="unit">Price of H₂, $/kg</span>
           </label>
           <label class="input">
             <input id="cprice" type="number" min="0" step="1" value="150" />
-            <span class="unit">Цена C (сажи), $/т</span>
+            <span class="unit">Price of C (carbon black), $/t</span>
           </label>
           <label class="input">
             <input id="ccost" type="number" min="0" step="1" value="10" />
-            <span class="unit">Стоимость CO₂-квот/эффекта, $/т</span>
+            <span class="unit">Price of CO₂-quotas/effect, $/t</span>
           </label>
           <label class="input">
             <input id="gwp" type="number" min="1" step="0.1" value="28" />
-            <span class="unit">GWP₁₀₀ CH₄ (IPCC), кг CO₂-экв./кг CH₄</span>
+            <span class="unit">GWP₁₀₀ CH₄ (IPCC), kg CO₂-eq./kg CH₄</span>
           </label>
         </div>
-        <p class="small">* Финансовый результат = выручка от H₂ + выручка от C + углеродный эффект − стоимость энергии. CAPEX не учитывается на этом экране.</p>
+        <p class="small">* Financial result = revenue from H₂ + revenue from C + carbon effect − energy costs. CAPEX is not taken into account on this screen.</p>
       </details>
 
-      <div class="footer">Стехиометрия: CH₄ → C + 2H₂. <span class="accent">1 м³ CH₄</span> ≈ 0.716 кг; даёт ≈ <span class="accent">2 м³ H₂</span> (≈0.179 кг) и <span class="accent">0.536 кг C</span>.</div>
+      <div class="footer">Stoichiometry: CH₄ → C + 2H₂. <span class="accent">1 m³ CH₄</span> ≈ 0.716 kg; yields ≈ <span class="accent">2 m³ H₂</span> (≈0.179 kg) and <span class="accent">0.536 kg C</span>.</div>
     </section>
   </main>
 
   <script>
-    // Константы
-    const KG_CH4_PER_NM3 = 0.716;     // кг CH4 / м³ CH4
-    const KG_H2_PER_NM3_CH4 = 0.1786; // кг H2 / м³ CH4
-    const NM3_H2_PER_NM3_CH4 = 2.0;   // м³ H2 / м³ CH4
-    const KG_C_PER_NM3_CH4  = 0.536;  // кг C / м³ CH4
+    // Constants
+    const KG_CH4_PER_NM3 = 0.716;     // kg CH4 / m³ CH4
+    const KG_H2_PER_NM3_CH4 = 0.1786; // kg H2 / m³ CH4
+    const NM3_H2_PER_NM3_CH4 = 2.0;   // m³ H2 / m³ CH4
+    const KG_C_PER_NM3_CH4  = 0.536;  // kg C / m³ CH4
 
     const $ = (id) => document.getElementById(id);
     const fmt = (x, digits=0) => {
@@ -173,44 +173,44 @@
     window.addEventListener("DOMContentLoaded", calc);
 
     function calc(){
-      const flow = +$("flow").value || 0;           // м³ CH4/год
-      const conv = (+$("conv").value || 0)/100;     // доля
-      const sei  = +$("sei").value || 0;            // кВт·ч/м³ CH4
-      const tariff = +$("tariff").value || 0;       // $/кВт·ч
-      const h2p = +$("h2price").value || 0;         // $/кг H2
-      const cp  = +$("cprice").value || 0;          // $/т C
-      const cc  = +$("ccost").value || 0;           // $/т CO2e
-      const gwp = +$("gwp").value || 28;            // кг CO2e / кг CH4
+      const flow = +$("flow").value || 0;           // m³ CH4/year
+      const conv = (+$("conv").value || 0)/100;     // share
+      const sei  = +$("sei").value || 0;            // kW·h/m³ CH4
+      const tariff = +$("tariff").value || 0;       // $/kW·h
+      const h2p = +$("h2price").value || 0;         // $/kg H2
+      const cp  = +$("cprice").value || 0;          // $/t C
+      const cc  = +$("ccost").value || 0;           // $/t CO2e
+      const gwp = +$("gwp").value || 28;            // kg CO2e / kg CH4
 
-      const flowEff = flow * conv;                  // м³/год CH4, эффективно разрушённый
+      const flowEff = flow * conv;                  // m³/year CH4, effectively destroyed
 
-      // Продукты
-      const h2kg  = flowEff * KG_H2_PER_NM3_CH4;    // кг/год H2
-      const h2m3  = flowEff * NM3_H2_PER_NM3_CH4;   // м³/год H2
-      const ckg   = flowEff * KG_C_PER_NM3_CH4;     // кг/год C
-      const ct    = ckg / 1000;                     // т/год C
+      // Products
+      const h2kg  = flowEff * KG_H2_PER_NM3_CH4;    // kg/year H2
+      const h2m3  = flowEff * NM3_H2_PER_NM3_CH4;   // m³/year H2
+      const ckg   = flowEff * KG_C_PER_NM3_CH4;     // kg/year C
+      const ct    = ckg / 1000;                     // t/year C
 
-      // Энергия и её стоимость
-      const kwh   = flowEff * sei;                  // кВт·ч/год
-      const energyCost = kwh * tariff;              // $/год
+      // Energy and its cost
+      const kwh   = flowEff * sei;                  // kW·h/year
+      const energyCost = kwh * tariff;              // $/year
 
-      // Климатический эффект
-      const ch4kg = flowEff * KG_CH4_PER_NM3;       // кг CH4/год
-      const co2e_t = (ch4kg * gwp) / 1000;          // т CO2e/год
+      // Climate effect
+      const ch4kg = flowEff * KG_CH4_PER_NM3;       // kg CH4/year
+      const co2e_t = (ch4kg * gwp) / 1000;          // t CO2e/year
 
-      // Выручка
-      const revH2 = h2kg * h2p;                     // $/год
-      const revC  = ct * cp;                        // $/год
-      const revCO2 = co2e_t * cc;                   // $/год
+      // Revenue
+      const revH2 = h2kg * h2p;                     // $/year
+      const revC  = ct * cp;                        // $/year
+      const revCO2 = co2e_t * cc;                   // $/year
 
       const profit = revH2 + revC + revCO2 - energyCost;
 
-      // Вывод
-      $("h2Mass").textContent = (h2kg>0)? `${fmt(h2kg,0)} кг/год` : "—";
-      $("h2Vol").textContent  = (h2m3>0)? `${fmt(h2m3,0)} м³/год` : "";
+      // Display
+      $("h2Mass").textContent = (h2kg>0)? `${fmt(h2kg,0)} kg/year` : "—";
+      $("h2Vol").textContent  = (h2m3>0)? `${fmt(h2m3,0)} m³/year` : "";
       $("cMass").textContent  = (ct>0)? `${fmt(ct,2)}` : "—";
       $("co2e").textContent   = (co2e_t>0)? `${fmt(co2e_t,1)}` : "—";
-      $("profit").textContent = isFinite(profit)? `${profit>=0?"+":""}${fmt(profit,0)} $/год` : "—";
+      $("profit").textContent = isFinite(profit)? `${profit>=0?"+":""}${fmt(profit,0)} $/year` : "—";
     }
   </script>
 </body>
